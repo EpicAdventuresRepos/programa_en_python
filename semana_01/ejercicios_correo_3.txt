@@ -1,0 +1,119 @@
+# Ejercicios de tipos booleanos.
+
+## B.1. Guarda en una variable el resultado de comprobar si otras dos variables tienen el mismo valor. ¿Te acuerdas qué tipo de dato es ese?
+>>> a = 10
+>>> b = 7
+>>> res = a == b
+>>> res
+False
+>>> type(res)
+<class 'bool'>
+
+## B.2. Crea una variable booleana que guarde el valor cierto y otra variable booleana que guarde el valor falso
+>>> cierto = True
+>>> falso = False
+
+## B.3. Tenemos una variable booleana llamada b. Crea una nueva variable que guarde el valor contrario (si b es cierto guardará falso y viceversa).
+>>> b = True
+>>> notb = not b
+>>> b
+FALSE
+
+## B.4. Guarda en una variable booleana si el valor que contiene una variable entera es par.
+>>> res = (a % 2) == 0
+>>> a
+5
+>>> res
+False
+
+* Si necesitas ayuda: una variable es par s el resto / módulo de la división entre 2 es 0. *
+
+# Ejercicios de tipos numéricos
+
+## B.5. Intercambia los valores de dos variables. Por ejemplo, si a vale 3 y b 5, cuando termines b valdrá 3 y a 5.
+>>> a = 3
+>>> b = 5
+>>> tmp = a
+>>> a = b
+>>> b = tmp
+>>> a
+5
+>>> b
+3
+
+## B.6. Existen funciones que pueden cambiar un tipo a otro. Las tienes aquí junto con otras funciones también útiles: https://docs.python.org/3/library/functions.html
+Vamos a usarlas con un ejercicio. Tenemos una variable que tiene un número, pero no sabemos su tipo. Crea una nueva variable que tenga el valor con un tipo entero (int) y otra que tenga el valor como un tipo de coma flotante (float).
+>>> valor = 3
+>>> v_entero = int(valor)
+>>> v_flotante = float(valor)
+
+## B.7. Las funciones de conversiones de tipos no hacen milagros. Prueba a intentar convertir un número a cadena de texto y a convertir la cadena "hola" en un número para que veas las diferencias.
+
+## B.8. Puedes descubrir el tipo de una varíale usando type() y también isinstance(). Pruébalo con distintos valores y variables (tienes estas funciones en el enlace de hoy). No hace falta que profundices en las diferencias entre ambas, no nos va a resultar de utilidad en este curso.
+¿Cómo podrías saber si una variable es de tipo entero?
+# Definir variables
+entero = 10
+decimal = 3.14
+texto = "Hola"
+booleano = True
+lista = [1, 2, 3]
+
+# Usar type()
+print(type(entero))    # <class 'int'>
+print(type(decimal))   # <class 'float'>
+print(type(texto))     # <class 'str'>
+print(type(booleano))  # <class 'bool'>
+print(type(lista))     # <class 'list'>
+
+# Ejercicios de cadenas
+Ya hemos hecho ejercicios con cadenas de texto, pero como son muy útiles y Python nos da muchas herramientas, vamos a hacer algunos más, como estos de aquí (pero si no te gustan has los tuyos propios que aquí programas tú).
+Tienes toda la documentación con cadenas un poco más abajo, aquí: https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str
+Fíjate que las cadenas son distintas, porque puedes invocar métodos sobre ellas. Más adelante veremos en detalle eso de los métodos y de invocar. Ahora sólo aprende a usar los de las cadenas y a ver qué se te ocurre hacer con ellos.
+
+## B.9. ¿Cuál crees que será el resultado de ejecutar "hola".count('a') en tu intérprete (count significa contar)? Pruébalo.
+>>> "hola".count('a')
+1
+
+## B.10. Si escribimos a = "hola".count('a'), ¿el tipo de a será entero o string? Pruébalo escribiendo type(a)
+>>> a = "hola".count('a')
+>>> type(a)
+<class 'int'>
+
+## B.11. Acabo de escribir en el intérprete x="10" y ahora quiso sumar 3 al valor de x pero que siga siendo una cadena de texto. Escribe cómo hacerlo.
+>>> x = str(int(x) + 3)
+
+## B.12. Divide una frase en palabras (busca entre todos los métodos de string que tienes en https://docs.python.org/3/library/stdtypes.html#string-methods uno que pueda hacerlo). No te preocupes si no sabes qué hacer con los trozos, lo veremos un poco más adelante con las listas.
+>>> "hola mundo mundial".split()
+['hola', 'mundo', 'mundial']
+
+## B.13. Python tiene una función, llamada len(), muy útil que nos sirve para saber la longitud de un tipo de dato que tiene longitud. Intenta predecir el resultado de estas instrucciones antes de ejecutarlas en tu intérprete: len(3), len("hola mundo") y len("hola mundo".split())
+>>> len(3)
+TypeError: object of type 'int' has no len()
+>>> len("hola mundo")
+10
+>>> len("hola mundo".split())
+2
+
+## B.14. Escribe un programa que busque cuántas veces aparece una palabra en un texto grande. ¿Cómo podrías hacer que no tenga en cuenta las mayúsculas y minúsculas?
+>>> texto.lower().count(palabra.lower())
+
+## B.15. Guarda una cadena en una variable y muestra esa cadena con todas las letras en mayúsculas y con todas las letras en minúscula. ¿Y si solo quieres la primera letra en mayúsculas?
+>>> cadena = "Hola mundo"
+>>> cadena.upper()
+>>> cadena.lower()
+
+## B.16. Compara dos cadenas de manera que devuelva cierto si ambas son iguales ignorando caracteres en mayúsculas o minúsculas.
+>>> cadena1.lower() == cadena2.lower()
+
+## B.17. Elimina todos los espacios de una cadena.
+>>> cadena.replace(" ", "")
+
+## B.18. Escribe un programa que reemplace todas las ocurrencias de un carácter en una cadena por otro carácter.
+>>> cadena.replace("a", "b")
+
+## B.19. Escribe un programa que cuente cuántas palabras hay en una cadena.
+>>> len(cadena.split())
+	
+## B.20. Buscar una palabra dentro de un texto.
+>>> "mundo" in "Hola mundo"
+* El operador in es muy útil y lo vamos a usar mucho más adelante *

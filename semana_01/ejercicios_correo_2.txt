@@ -1,0 +1,118 @@
+>> Programa en Python. Semana 1. Correo 2
+
+
+## A.1. Es una tradición empezar a programar con un "hola mundo". Escríbelo.
+
+>> print("Hola Mundo")
+
+
+## A.2. Calcula la media de 12,15,18,22,25 con decimales y sin decimales.
+
+>>> (12 + 15 + 18 + 22 + 25) / 5
+18.4
+>>> (12 + 15 + 18 + 22 + 25) // 5
+18
+
+
+## A.3. Si un coche recorre 120 km en 3 horas, ¿cuántos kilómetros recorrerá en 7 horas?
+
+>>> (120 / 3) * 7
+280.0
+
+
+## A.4. ¿Sabes que pasa cuando sumas "hola " y "mundo"? Pruébalo en el intérprete.
+
+>>> "hola " + "mundo"
+'hola mundo'
+
+
+## A.5. ¿Te has dado cuenta que tú usas " pero Python te muestra '? Escribe estas dos sentencias y comprueba la diferencia. Prueba más combinaciones.
+>>> print("hola "mundo".")
+>>> print("hola 'mundo'.")
+
+>>> print("hola "mundo".")
+  File "<stdin>", line 1
+    print("hola "mundo".")
+          ^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+>>> print("hola 'mundo'.")
+hola 'mundo'.
+
+
+## A.6. Prueba a sumar una cadena y un número, por ejemplo 3 + "hola" (y también "hola" + 3). Veremos más sobre esto pronto.
+
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+
+## A.7. Una variable es una caja dónde guardamos un dato. En la línea de abajo, creamos una caja llamada x y guardamos el número 3. ¿Cómo puedes ver el valor que hay guardado? ¿Puedes hacer lo mismo de antes (sumarle valores, multiplicarlo, etc.)? Prueba cosas.
+>>> x=3
+
+>>> x+2
+5
+>>> x
+3
+>>> print(x)
+3
+
+* Nota sobre el A.7. Normalmente en tus programas usarás print para mostrar el valor de una variable. En el intérprete puedes hacerlo, pero si escribes el nombre de vla variable también verás su valor. *
+
+
+## A.8. Resuelve 3x+7=22. Intenta guardar el valor en la variable x. ¿Qué crees que pasará con el valor que ya tenía x?
+
+>>> x = (22-7)/3
+>>> x
+5.0
+
+
+## A.9. Calcula la suma de los números desde 1 hasta un número guardado en una variable. Puedes hacer esto con una fórmula. Por ejemplo, si la variable se llama n y vale 5, el resultado de la fórmula es 15 (5+4+3+2+1). 
+
+>>> n = 5
+>>> suma = n * (n + 1) // 2
+>>> suma
+
+
+## A.10. Una cadena tiene muchos caracteres, y también podemos acceder a ellos individualmente. Mete la cadena "hola mundo" en una variable, por ejemplo m, y mira qué pasa cuando escribimos m[5]. ¿Puedes mostrar solo el primer y el último carácter?
+
+>>> m = "hola mundo"
+>>> m[5]
+'m'
+>>> m[0]
+'h'
+>>> m[9]
+'o'
+>>> m[-1]
+'o'
+
+
+## A.11. Además de índices (lo que va entre los []) también podemos usar rangos. ¿qué crees que pasará si usas el rango 2:5 con la cadena que tenemos en m? Piénsalo y pruébalo.
+
+>>> m = "hola mundo"
+>>> m[2:5]
+'la '
+
+
+## A.12. ¿a que no se te ha ocurrido aún poner números negativos en los rangos? Prueba varias combinaciones. Prueba también a poner sólo un número en el rango.
+
+>>> m = "hola mundo"
+>>> m[-2]
+'d'
+>>> m[-2:-4]
+''
+>>> m[-2:]
+'do'
+>>> m[:-2]
+'hola mun'
+>>> m[1:-2]
+'ola mun'
+>>> m[-3:6]
+''
+>>> m[-3:2]
+''
+
+## A.13, ¿Son iguales las cadenas “Hola”, “hola” y “HOLA”? Compruébalo tú mismo comparándolas con == (y fíjate que = es para dar valor y == para comparar).
+
+>>> "hola" == "Hola"
+False
+>>> "HOLA" == "Hola"
+False
+>>>

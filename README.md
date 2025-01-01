@@ -1,2 +1,6 @@
-# programa_en_python
-Curso de programación en Python
+# >> Programa en Python
+
+Curso de programación en Python para juegos de texto.
+https://epicadventures.itch.io/programa-python
+
+
