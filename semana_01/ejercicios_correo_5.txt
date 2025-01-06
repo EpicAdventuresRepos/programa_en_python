@@ -1,0 +1,173 @@
+# Ejercicios de funciones
+
+## D.1. Escribe una función que devuelva un número, por ejemplo, el 3, y un fragmento de código que llame a esa función y muestre el número que devuelve por la pantalla.
+
+def tres():
+	return "3"
+	
+print(tres())
+
+## D.2. Vamos a hacer lo mismo que en el ejercicio anterior, pero en vez de devolver siempre el mismo número, va a devolver el número que le pasemos por parámetro, más uno.
+
+def mas_uno(numero):
+	return numero + 1
+	
+print(mas_uno(3))
+
+
+## D.3. Escribe una función llamada area_rectangulo que reciba el ancho y el alto de un rectángulo y devuelva su área. Comienza a partir del siguiente código y fíjate cómo usamos pass para indicar un bloque de código que no hace nada.
+
+def area_rectangulo(ancho, alto):
+    """ Quita el pass y pon la magia en su lugar """
+    pass
+
+"""
+Prueba
+Salida esperada: 50
+"""
+print(area_rectangulo(5, 10))  
+
+
+def area_rectangulo(ancho, alto):
+	return ancho * alto
+	
+	
+## D.4. Escribe una función llamada es_primo que reciba un número y devuelva True si es primo, o False en caso contrario. Fíjate como hemos añadido una anotación del tipo de datos del parámetro. Tienes más sobre eso en la sección 4.9.8, justo aquí: https://docs.python.org/3/tutorial/controlflow.html#function-annotations
+
+def es_primo(numero: int):
+    """ Tu código aquí """
+    pass
+
+"""
+Prueba
+Salida: True
+Salida: False
+"""
+print(es_primo(7))   
+print(es_primo(10))  
+
+* Una manera bruta pero efectiva es intentar dividir el número por todos los números desde 1 hasta su mitad *
+
+
+def es_primo(numero):
+    if numero <= 1:  
+        return False
+    for i in range(2, int(numero**0.5) + 1):  
+        if numero % i == 0:  
+            return False
+    return True  
+	
+
+## D.5. Escribe una función llamada saludar que reciba un nombre y un argumento opcional mensaje. Si no se proporciona un mensaje, la función saludará de manera predeterminada. Aprovecha y dale un repaso a la parte de valores para parámetros del tutorial.
+
+def saludar(nombre, mensaje="¡Hola! "):
+	pass
+
+
+def saludar(nombre, mensaje="¡Hola! "):
+	print(mensaje, nombre)
+
+
+## D.6. Una función puede devolver más de un valor. Es mejor no abusar, pero si te simplifica tu código adelante. 
+        Escribe una función que reciba un número y devuelva el número anterior y el número siguiente. Aprovecha y repasa esa parte del tutorial.
+
+def anterior_siguiente(numero):
+	return numero-1, numero+1
+
+anterior, siguiente = anterior_siguiente(3)
+print(anterior)
+print(siguiente)
+
+## D.7. Llama a la función anterior guardando sólo el valor siguiente en una variable y descartando el valor anterior.
+	
+def anterior_siguiente(numero):
+	return numero-1, numero+1
+
+_, siguiente = anterior_siguiente(3)
+print(siguiente)
+
+
+## D.8. Escribe una función que calcule el área de un círculo. No te de vergüenza si tienes que buscar la fórmula.
+
+import math
+radio = float(input("Introduce el radio del círculo: "))
+area = math.pi * radio**2
+print("El área del círculo es:", area)
+
+
+## D.9. Las funciones se pueden llamar entre ellas sin ningún límite. Vamos a hacer un ejemplo, por ejemplo, una función que pida tu nombre y llame a otra función que te salude.
+
+def saludo(nombre):
+    print(f"Hola, {nombre}!")
+
+def mostrar_saludo():
+    nombre = input("¿Cómo te llamas? ")  
+    saludo(nombre)             
+
+mostrar_saludo()
+
+## D.10. Una manera cómoda de trabajar es que el código se pruebe a sí mismo. Lo veremos más adelante con más detalle, pero puede empezar ya. Escribe una función que verifique que tu función para calcular el área de un rectángulo funciona correctamente. Puedes hacerlo llamándola varias veces, comprobando que los resultados son los esperados e imprimiendo por pantalla si todo ha ido bien o algún resultado no concuerda.
+
+def verificar_area():
+    area = area_rectangulo(base, altura)  # Llama a la función de cálculo
+    if area == 15:
+		print("El área calculada es correcta.")
+	else:
+		print("El área calculada es incorrecta.")
+
+
+# Ejercicios de recursividad
+
+La recursividad es cuando una función se llama a sí misma y el ordenador no explota. 
+No necesitas la recursividad para nada. Pero es más sencillo resolver algunos problemas programando una función recursiva.
+Por ejemplo, sumar los N primeros números es sumar N a la suma de los N-1 primeros números. ¿Ves la recursividad aquí?
+Para no meter nunca la pata, lo único que necesitas saber es hacer buenos casos base. El caso base es la condición que detiene las llamadas recursivas. 
+Como te he dicho, cualquier código se puede programar sin recursividad. Pero, aunque nunca lo uses en tu vida, es una buena práctica resolver ejercicios recursivos. así que aquí tienes algunos para que te conviertas en un gran programador.
+
+## D.11. Tengo una función que muestra los 10 primeros números por pantalla usando recursividad, pero no me funciona. A ver si puedes arreglarla. O escribir la tuya propia desde el principio.
+def rec():
+	n = n + 1
+	print(n)
+	if n == 10:
+		return
+
+## D.12. Escribe una función para calcular el factorial de un número. El factorial es ese número multiplicado por el factorial del número anterior y el factorial de 0 es 1 y ahí se termina.
+
+def factorial(n):
+    if n == 0:  # Caso base
+        return 1
+    else:
+        return n * factorial(n - 1)  # Caso recursivo
+
+numero = int(input("Introduce un número: "))
+print("El factorial es:", factorial(numero))
+
+## D.13. Escribe una función recursiva que calcule la suma de los primeros N números enteros positivos.
+
+def suma_numeros(n):
+    if n <= 0:  # Caso base: Si N es 0 o negativo, la suma es 0
+        return 0
+	elif n % 2 != 0:
+		return suma_numeros(n - 1)
+    else:
+        return n + suma_numeros(n - 1)
+
+
+## D.14. ¿Te acuerdas de la función de Fibonacci? Se resuelve muy bien de manera recursiva. Prueba y sacas tus propias conclusiones. Recuerda que la secuencia comienza con 0 y 1, y cada término es la suma de los dos anteriores.
+
+def fibonacci(n):
+    if n <= 0:  
+        return 0
+    elif n == 1:  
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+## D.15. Escribe una función recursiva que calcule la suma de los dígitos de un número entero positivo. Por ejemplo, para el número 3412 el resultado será 10. Puedes acceder a cada dígito de varias maneras, por ejemplo, convirtiendo el número en cadena o aprovechando la función módulo.
+
+def suma_digitos(numero):
+    if numero == 0:  # Caso base: si el número es 0, la suma es 0.
+        return 0
+    else:
+        return (numero % 10) + suma_digitos(numero // 10)

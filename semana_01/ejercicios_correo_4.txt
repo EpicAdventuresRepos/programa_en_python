@@ -1,0 +1,126 @@
+# Ejercicios de bloques for
+
+## C.1. Imprime los primeros 10 números usando un bucle for.
+for i in range(1, 11): 
+	print(i)
+
+## C.2. Imprime los primeros 10 números en orden inverso.
+for i in range(10, 0, -1): 
+	print(i)
+
+## C.3. Imprime los 10 primeros números pares.
+for i in range(2, 21, 2): 
+	print(i)
+
+## C.4. Imprime los primeros 10 impares.
+for i in range(1, 20, 2): 
+	print(i)
+
+## C.5. Escribe un programa que imprima los números del 1 hasta un número indicado por el usuario (con input).
+n = int(input("¿Hasta qué número quieres contar? "))
+for i in range(1, n + 1):
+    print(i)
+
+## C.6. Imprime los primeros N números de Fibonacci. La secuencia de Fibonacci es una sucesión de números en la que cada número es la suma de los dos anteriores, comenzando con 0 y 1. 
+n = int(input("Introduce la cantidad de números de Fibonacci: "))
+if n == 0:
+        fibonacci = 0
+elif n == 1:
+        fibonacci = 1
+    else:
+        a, b = 0, 1
+        for _ in range(2, n + 1):
+            c = a + b
+            a = b
+            b = c
+        print(b)
+
+## C.7. Escribe un programa que imprima la tabla de multiplicar de un número dado por el usuario.
+num = int(input("Escribe un número: "))
+for i in range(1, 11):
+    print(f"{num} x {i} = {num * i}")
+
+
+# Ejercicios bloque if
+
+## C.8. Escribe un programa que pida tu edad y te diga si eres mayor de edad o no (intenta usar else).
+if edad >= 18:
+    print("Eres mayor de edad")
+
+## C.9 Modifica el programa anterior para que, si eres mayor de edad te diga si ya cobras pensión (intenta usar elif).
+if edad < 18:
+    print("Eres menor de edad")
+elif edad >= 67:
+    print("cobras pensión")
+else:
+    print("Ni uno ni otro")
+
+## C.10. Escribe un programa que pida tres números y imprima cuál es el mayor.
+num1 = int(input("Ingresa el primer número: "))
+num2 = int(input("Ingresa el segundo número: "))
+num3 = int(input("Ingresa el tercer número: "))
+
+if num1 >= num2 and num1 >= num3:
+    print(f"El número mayor es: {num1}")
+elif num2 >= num1 and num2 >= num3:
+    print(f"El número mayor es: {num2}")
+else:
+    print(f"El número mayor es: {num3}")
+
+## C.11. Escribe un programa que pida una contraseña y devuelve True si cumple todas las siguientes reglas:
+Debe tener al menos 8 caracteres.
+Debe incluir al menos un número.
+Debe incluir al menos una letra mayúscula.
+* Un ejemplo que lo cumple es Abc12345 y un ejemplo que no la cumple es abc123 *
+
+contraseña = input("Ingresa una contraseña: ")
+tiene_numero = False
+tiene_mayuscula = False
+
+for char in contraseña:
+    if char.isdigit():
+        tiene_numero = True
+    if char.isupper():
+        tiene_mayuscula = True
+
+tiene_longitud = len(contraseña) >= 8
+
+es_valida = tiene_longitud and tiene_numero and tiene_mayuscula
+if es_valida:
+    print("True: La contraseña cumple con todas las reglas.")
+else:
+    print("False: La contraseña no cumple con las reglas.")
+
+# Bloques for e if
+
+## C.12. Si unimos un if con un for tenemos un while. While ejecuta un bloque de código mientras una condición sea cierta o mientras no encuentre un break n el bloque. Vamos a usarlo en un ejercicio.
+Escribe un programa en el que tienes N intentos para adivinar un número. En cada intento, el programa te dirá si el número a adivinar es mayor o menor. Esta es una oportunidad para que practiques el uso de break.
+* Si quieres que tu programa genere un número aleatorio (entre 1 y 100), utiliza el siguiente código. *
+import random
+numero_secreto = random.randint(1, 100)
+*
+
+print("Adivina el número (entre 1 y 100):")
+while True:
+    intento = int(input("Escribe tu número: "))
+    if intento < numero_secreto:
+        print("Muy bajo, intenta de nuevo.")
+    elif intento > numero_secreto:
+        print("Muy alto, intenta de nuevo.")
+    else:
+        print("¡Felicidades, adivinaste el número!")
+        break
+
+# C.13. Una tienda te descuenta un 1% por cada 10 euros de gasto hasta un máximo de un 10%. Escribe un programa en la que, para un gasto, te diga el descuento.
+gasto = int(input("Ingresa el gasto total en euros: "))
+descuento = (gasto // 10) * 1  
+if descuento > 10:  
+    descuento = 10
+print(f"El descuento aplicado es: {descuento}%")
+
+## C14. Escribe un programa que compruebe si una cadena es igual al revés, ignorando espacios y mayúsculas. Este ejercicio es muy sencillo si te acuerdas cómo usar los rangos para mostrar una cadena al revés.
+cadena = input("Escribe una cadena: ")
+if cadena == cadena[::-1]
+    print("La cadena es un palíndromo.")
+else:
+    print("La cadena no es un palíndromo.")
