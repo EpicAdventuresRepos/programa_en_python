@@ -1,0 +1,122 @@
+## G.1. Escribe algunas pruebas para probar una función te dice si un número es par o impar.
+
+class TestEsPar(unittest.TestCase):
+    def test_es_par(self):
+        self.assertTrue(es_par(4))
+        self.assertFalse(es_par(3))
+        self.assertTrue(es_par(0))
+        self.assertFalse(es_par(-5))
+
+## G.2. Escribe una función que indique si un año es bisiesto. Para que un año sea bisiesto tiene que ser divisible entre 4 pero no divisible entre 100 o divisible entre 400. 
+
+def es_bisiesto(año):
+    return (año % 4 == 0 and año % 100 != 0) or (año % 400 == 0)
+
+Prueba unitaria:
+
+class TestEsBisiesto(unittest.TestCase):
+    
+	def test_año_es_bisiesto(self):
+        self.assertTrue(es_bisiesto(2000))
+        self.assertTrue(es_bisiesto(2024))
+
+	def test_año_no_es_bisiesto(self):
+        self.assertFalse(es_bisiesto(1900))
+        self.assertFalse(es_bisiesto(2023))
+
+if __name__ == "__main__":
+    unittest.main()
+	
+
+## G.3. Escribe una función dividir(a, b) que devuelva la división de dos números, pero maneje el caso en que b sea 0 lanzando una excepción.
+
+* Antes de que hagas este ejercicio te recuerdo esto de las excepciones. 
+Una excepción es un evento que ocurre durante la ejecución de un programa y que interrumpe su flujo normal si no se maneja. Las excepciones suelen indicar errores, como dividir por cero, intentar acceder a un archivo inexistente o usar un índice fuera de rango en una lista. *
+
+def dividir(a, b):
+    if b == 0:
+        raise ValueError("No se puede dividir por cero")
+    return a / b
+
+Prueba unitaria:
+
+class TestDividir(unittest.TestCase):
+    def test_dividir(self):
+        self.assertEqual(dividir(10, 2), 5)
+        self.assertEqual(dividir(9, 3), 3)
+	
+	def test_division_por_cero(self):
+
+        with self.assertRaises(ValueError):
+            dividir(5, 0)
+
+if __name__ == "__main__":
+    unittest.main()
+
+## G.4. Escribe una función calcular_promedio(lista) que calcule el promedio de los números en una lista. Si la lista está vacía, devuelve 0.
+
+def calcular_promedio(lista):
+    if not lista:
+        return 0
+    return sum(lista) / len(lista)
+
+class TestCalcularPromedio(unittest.TestCase):
+    def test_calcular_promedio(self):
+        self.assertEqual(calcular_promedio([1, 2, 3, 4]), 2.5)
+        self.assertEqual(calcular_promedio([]), 0)
+        self.assertEqual(calcular_promedio([5]), 5)
+
+if __name__ == "__main__":
+    unittest.main()
+
+## G.5. Escribe una función es_primo(n) que devuelva True si un número es primo, y False en caso contrario.
+
+def es_primo(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+
+class TestEsPrimo(unittest.TestCase):
+    def test_es_primo(self):
+        self.assertTrue(es_primo(7))
+        self.assertFalse(es_primo(4))
+        self.assertFalse(es_primo(1))
+        self.assertTrue(es_primo(29))
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+## G.6. escribe una función en Python que una dos listas y un conjunto de casos de prueba para verificar la función
+
+def unir_listas(lista1, lista2):
+    return lista1 + lista2
+	
+
+import unittest
+
+class TestUnirListas(unittest.TestCase):
+    def test_ambas_listas_con_elementos(self):
+        self.assertEqual(unir_listas([1, 2, 3], [4, 5, 6]), [1, 2, 3, 4, 5, 6])
+
+    def test_primera_lista_vacia(self):
+        self.assertEqual(unir_listas([], [7, 8, 9]), [7, 8, 9])
+
+    def test_segunda_lista_vacia(self):
+        self.assertEqual(unir_listas([10, 11, 12], []), [10, 11, 12])
+
+    def test_ambas_listas_vacias(self):
+        self.assertEqual(unir_listas([], []), [])
+
+    def test_listas_con_diferentes_tipos_de_datos(self):
+        self.assertEqual(unir_listas(["a", "b"], [1, 2]), ["a", "b", 1, 2])
+
+    def test_listas_con_elementos_repetidos(self):
+        self.assertEqual(unir_listas([1, 2, 2], [3, 2, 1]), [1, 2, 2, 3, 2, 1])
+
+if __name__ == "__main__":
+    unittest.main()

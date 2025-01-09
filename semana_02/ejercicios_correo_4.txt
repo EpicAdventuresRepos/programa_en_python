@@ -1,0 +1,209 @@
+
+## H.1. Esta es una clase muy sencilla que representa un punto x,y. Primero asegúrate que entiendes todo el código. Después, usa esta clase para crear los puntos 3,4, 7,8 y 10, 12
+
+class Punto(object):
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
+		
+Añade también un par de métodos a la clase punto y prueba su funcionamiento. Por ejemplo puedes añadir una clase para sumar dos puntos, para mover un punto, para ver si está en origen, etc. Acuérdate del self.
+
+
+class Punto(object):
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
+	
+	def suma(Punto otro):
+		self.x += otro.x
+		self.y += otro.y
+
+
+if __name__ == "__main__":
+	p1 = Punto(3, 4)
+	p2 = Punto(7, 8)
+	p3 = Punto(10, 12)
+
+
+## H.2. A partir de la clase punto, crea una clase Rectángulo y varios objetos rectángulos. Intenta añadirle todo lo que se te ocurra.
+
+class Rectangulo:
+    def __init__(self, ancho, alto):
+        self.ancho = ancho
+        self.alto = alto
+
+    def area(self):
+        return self.ancho * self.alto
+
+    def perimetro(self):
+        return 2 * (self.ancho + self.alto)
+
+    def escalar(self, factor):
+        self.ancho *= factor
+        self.alto *= factor
+
+    def __str__(self):
+        return f"Rectángulo(ancho={self.ancho}, alto={self.alto})"
+
+
+## H.3. Crea una clase llamada Círculo con el siguiente atributo: radio (flotante). Y los siguientes métodos: __init__, área, perímetro. Escribe también estos ejemplos como pruebas unitarias y verifica que tu clase funciona:
+
+import math
+
+class Circulo:
+    def __init__(self, radio):
+        self.radio = radio
+
+    def area(self):
+        return math.pi * self.radio ** 2
+
+    def perimetro(self):
+        return 2 * math.pi * self.radio
+
+
+circulo = Círculo(5)
+print(circulo.area())  # Salida: 78.54 (aproximadamente)
+print(circulo.perimetro())  # Salida: 31.42 (aproximadamente)
+
+
+## H.4. Crea una clase llamada Persona con los siguientes atributos: nombre (cadena), edad (entero). Y con los siguientes métodos: __init__: inicializa los atributos, saludar: imprime un saludo que incluya el nombre de la persona.
+
+class Persona(object):
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        print(f"¡Hola! Mi nombre es {self.nombre}.")
+
+
+if __name__ == "__main__":
+	persona = Persona("Juan", 35)
+	persona.saludar()  
+
+
+## H.5. Crea una clase Nave. Una nave tiene una posición x, y que es la posición y un rectángulo que es la caja de colisiones. Si quieres puedes aprovechar las clases Punto y Rectángulo que ya tienes. Escribe un método colisión que, con una segunda nave indica si ambas colisionan o no
+
+class Nave:
+    def __init__(self, x, y, ancho, alto):
+        self.x = x
+        self.y = y
+        self.ancho = ancho
+        self.alto = alto
+
+    def colision(self, otra_nave):
+        return not (
+            self.x + self.ancho < otra_nave.x or  
+            self.x > otra_nave.x + otra_nave.ancho or  
+            self.y + self.alto < otra_nave.y or  
+            self.y > otra_nave.y + otra_nave.alto  
+        )
+
+
+## H.6. Crea una clase que funcione como un multiset. En la sección 5.4 del tutorial tienes explicado que es un set. Un multiset es un tipo de dato que guarda cuantas copias de cada objeto hay. El enlace de la sección 5.4 es: https://docs.python.org/3/tutorial/datastructures.html#sets
+
+from collections import defaultdict
+
+class Multiset:
+    def __init__(self):
+        self.elementos = defaultdict(int)
+
+    def agregar(self, elemento):
+        self.elementos[elemento] += 1
+
+    def eliminar(self, elemento):
+        if self.elementos[elemento] > 0:
+            self.elementos[elemento] -= 1
+            if self.elementos[elemento] == 0:
+                del self.elementos[elemento]
+			return True
+		return False
+
+    def contar(self, elemento):
+        return self.elementos[elemento]
+
+    def vacio(self):
+        return len(self.elementos) == 0
+
+    def __str__(self):
+        return f"Multiset({dict(self.elementos)})"
+
+    def union(self, otro_multiset):
+        resultado = Multiset()
+        for elemento, conteo in self.elementos.items():
+            resultado.elementos[elemento] = conteo
+        for elemento, conteo in otro_multiset.elementos.items():
+            resultado.elementos[elemento] += conteo
+        return resultado
+
+* Mira la solución y fíjate en todos los métodos que tiene. ¿Puedes implementar algunos de ellos en tu clase? *
+
+
+## H.7. Primer ejercicio sobre herencia
+Aunque ya lo habrás leído en el tutorial (y si no este es el momento), te explico brevemente qué es la herencia.
+La herencia te permite crear una nueva clase (subclase o clase hija) a partir de una clase existente (base o clase padre). La subclase tiene todo de la clase padre, y puede añadir cosas nuevas o modificar la herencia.
+No abuses porque luego es difícil saber dónde está el código y pequeños cambios pueden tener impactos enormes.
+Vamos al ejercicio.
+Crea dos clases: una clase Animal con los atributos nombre y especie y un método hacer_sonido() que imprime "El animal hace un sonido". Y otra clase Perro que herede de Animal y sobrescriba el método hacer_sonido() para imprimir "Guau guau".
+Ejemplo de uso:
+
+if __name__ == "__main__":
+	animal = Animal("Genérico", "Desconocido")
+	animal.hacer_sonido()  # Salida: El animal hace un sonido
+	perro = Perro("Rex", "Canino")
+	perro.hacer_sonido()  # Salida: Guau guau
+
+
+
+class Animal:
+    def __init__(self, nombre, especie):
+        self.nombre = nombre
+        self.especie = especie
+
+    def hacer_sonido(self):
+        print("El animal hace un sonido.")
+
+
+class Perro(Animal):
+    def __init__(self, nombre):
+        super().__init__(nombre, "Perro")
+
+    def hacer_sonido(self):
+        print("Guau guau")
+
+* Hemos usado mucho la herencia en Epic Cavern, si le echas un ojo a los datos la vas a ver por todo lados *
+
+
+## H.8. Crea una clase Producto con nombre y precio. Crea dos clases que hereden de Producto: ProductoElectronico con un atributo garantía (en años) y un método descripcion(). Y ProductoAlimenticio con un atributo fecha_vencimiento y un método es_fresco() que verifica si el producto está vencido.
+
+from datetime import datetime
+
+class Producto:
+    def __init__(self, nombre, precio):
+        self.nombre = nombre
+        self.precio = precio
+
+    def __str__(self):
+        return f"Producto(nombre='{self.nombre}', precio={self.precio:.2f})"
+
+class ProductoElectronico(Producto):
+    def __init__(self, nombre, precio, garantia):
+        super().__init__(nombre, precio)
+        self.garantia = garantia
+
+    def descripcion(self):
+        return f"El producto '{self.nombre}' cuesta {self.precio:.2f} y tiene una garantía de {self.garantia} años."
+
+class ProductoAlimenticio(Producto):
+    def __init__(self, nombre, precio, fecha_vencimiento):
+        super().__init__(nombre, precio)
+        self.fecha_vencimiento = datetime.strptime(fecha_vencimiento, '%Y-%m-%d')
+
+    def es_fresco(self):
+        return datetime.now() < self.fecha_vencimiento
+
+    def __str__(self):
+        estado = "fresco" if self.es_fresco() else "vencido"
+        return f"ProductoAlimenticio(nombre='{self.nombre}', precio={self.precio:.2f}, vencimiento={self.fecha_vencimiento.date()}, estado={estado})"
+
+

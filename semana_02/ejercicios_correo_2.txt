@@ -1,0 +1,184 @@
+# Ejercicios de cadenas de texto avanzadas.
+
+## F.1. Compara dos cadenas de manera que devuelva cierto si ambas son iguales ignorando vocales con tilde.
+
+def eliminar_tildes(cadena):
+    # Diccionario de equivalencias
+    tildes = {
+        "á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u",
+        "Á": "a", "É": "e", "Í": "i", "Ó": "o", "Ú": "u"
+    }
+    return ''.join(tildes.get(char, char) for char in cadena)
+
+cadena1 = "Canción"
+cadena2 = "cancion"
+print(eliminar_tildes(cadena1.lower()) == eliminar_tildes(cadena2.lower()))
+
+
+## F.2. Vamos a trabajar con f-strings (que ya has visto). Te cuento lo que son. Además lo tienes en la sección 2.4.3 (https://docs.python.org/3/reference/lexical_analysis.html#formatted-string-literals).
+Una f-string permiten incluir expresiones directamente dentro de la propia cadena. por ejemplo:
+a = 5
+b = 3
+print(f"La suma de {a} y {b} es {a + b}.")
+Tanto si las usas o no, veremos algo parecido en la semana 3 para trabajar con plantillas. Te propongo ahora varios ejercicios con f-strings.
+Usa un f-string para mostrar una variable toda en mayúsculas
+
+cadena = "upper"
+print(f"El texto en mayúsculas es {cadena.upper()}.")
+
+
+## F.3. Muestra el número pi sólo con dos decimales
+
+pi = 3.14159265
+print(f"El valor de pi con 2 decimales es {pi:.2f}.")
+
+
+## F.4. Muestra una cadena 3 veces, la primera justificada a la izquierda, la segunda en el centro y la tercera en la izq.
+
+cad = "Python"
+print(f"|{cad:<10}|{cad:^10}|{cad:>10}|")
+# Salida: |Python      |   Python   |      Python|
+
+
+## F.5. Un f-string también soporta la notación de triple comillas. Haz un ejemplo con un texto con varias líneas y varias expresiones dentro.
+
+nombre = "Goblin"
+vida = 28
+ataque = "espada"
+
+mensaje = f"""
+Un {nombre} te ataca con su {ataque}.
+Tiene [vida] puntos de vida.
+"""
+print(mensaje)
+
+
+
+# Ejercicios con ficheros
+* Sí, hay un salto en la numeración, no te falta nada. *
+
+## F.8. Crea un fichero de texto en Pycharm (o tu IDE) con algún contenido. Escribe un programa que lo lea y lo muestre por pantalla.
+
+# texto.txt contiene:
+# Hola, este es un fichero de prueba.
+
+with open("texto.txt", "r") as archivo:
+    contenido = archivo.read()
+    print(contenido)
+
+## F.9. Escribe un programa, o modifica el anterior, para que solo muestre el contenido el fichero cuando haya terminado de leerlo.
+
+contenido = list()
+with open("texto.txt", "r") as archivo:
+    contenido.append(archivo.read())
+print(contenido)
+
+
+## F.10. Escribe un programa que pida un texto por teclado y lo guarde en un fichero (acuérdate que lees el teclado con input()). Una vez que lo tengas, prueba las siguientes variantes.
+1. Las frases se van agregando al fichero
+2. Escribe un bucle que siga pidiendo frases hasta que el usuario escriba solo un punto (por ejemplo un while / break).
+
+with open("salida.txt", "w") as archivo:
+    while True:
+        frase = input("Escribe una frase (o FIN para terminar): ")
+        if frase.upper() == "FIN":
+            break
+        archivo.write(frase + "\n")
+print("Las frases han sido guardadas en salida.txt")
+
+
+## F.11. Escribe un programa que copie un fichero. Para ello lee el contenido del fichero original y guárdalo en el nuevo fichero
+
+with open("original.txt", "r") as archivo_origen:
+    contenido = archivo_origen.read()
+with open("copia.txt", "w") as archivo_destino:
+    archivo_destino.write(contenido)
+print("El contenido ha sido copiado a copia.txt")
+
+
+## F.12. Crea a mano un archivo de texto que contenga líneas y cada línea dos valores separados por un carácter, por ejemplo, un ':'. Escribe un programa para leerlo y guardar cada línea en un diccionario.
+
+notas = {}
+with open("notas.txt", "r") as archivo:
+    for linea in archivo:
+        nombre, nota = linea.strip().split(",")
+        notas[nombre] = int(nota)
+
+print(notas)
+* La salida esperada es: {'Juan': 8, 'María': 7, 'Luis': 9, 'Ana': 6} *
+
+
+## F.13. Escribe un programa que lea un fichero y guarde en otro fichero solo las líneas pares.
+
+def guardar_lineas_pares(fichero_entrada, fichero_salida):
+    try:
+        with open(fichero_entrada, 'r') as entrada:
+            lineas = entrada.readlines()
+        
+        lineas_pares = [linea for i, linea in enumerate(lineas, start=1) if i % 2 == 0]
+        
+        with open(fichero_salida, 'w') as salida:
+            salida.writelines(lineas_pares)
+        
+        print(f"Líneas pares guardadas correctamente en '{fichero_salida}'.")
+    except FileNotFoundError:
+        print(f"Error: El fichero '{fichero_entrada}' no existe.")
+    except Exception as e:
+        print(f"Se produjo un error: {e}")
+
+fichero_entrada = 'entrada.txt'  
+fichero_salida = 'salida.txt'    
+guardar_lineas_pares(fichero_entrada, fichero_salida)
+
+
+## F.14. Escribe un programa que lea dos ficheros y el guarde el contenido en un tercer fichero alternando líneas de cada fichero.
+
+with open("fichero1.txt", "r") as archivo1, open("fichero2.txt", "r") as archivo2:
+    lineas1 = archivo1.readlines()
+    lineas2 = archivo2.readlines()
+
+lineas_combinadas = [linea for pareja in zip(lineas1, lineas2) for linea in pareja]
+
+with open("combinado.txt", "w") as combinado:
+    combinado.writelines(lineas_combinadas)
+
+print("El contenido de los dos ficheros ha sido combinado en combinado.txt.")
+
+
+# Ejercicios de gestión de ficheros
+
+* Las operaciones con ficheros y directorios se implementan fácilmente de forma recursiva. 
+Por ejemplo, si quieres buscar un fichero, recorres los ficheros de un directorio, y si uno de esos ficheros es otro directorio, entras en él y vuelves a hacer lo mismo. 
+Por eso, estos ejercicios también sirven de repaso de la recursividad. Si en su momento no le cogiste el tranquilo intentas hacer estos ejercicios, pero también escríbeme y lo vemos con más detalle.
+* Aquí también hay un salto en la numeración, no te falta nada. *
+
+## F.17. Escribe un programa para buscar archivos de un tipo (por extensión). 
+*Solución en findfiles.py*
+
+## F.18. Escribe un programa para buscar archivos con el mismo nombre y tamaño y distinta extensión o en distintos directorios
+
+## F.19. Escribe un programa que copie todo el contenido de un directorio en otro directorio. el nuevo directorio tendrá el nombre del antiguo directorio más la fecha y hora de creación.
+
+import os
+import shutil
+from datetime import datetime
+
+def copiar_directorio(directorio_origen, directorio_destino_base):
+    try:       
+        nombre_directorio = os.path.basename(directorio_origen.rstrip("/\\"))
+        
+        fecha_hora = datetime.now().strftime("%Y%m%d_%H%M%S")
+        nuevo_directorio = os.path.join(directorio_destino_base, f"{nombre_directorio}_{fecha_hora}")
+		os.makedirs(nuevo_directorio, exist_ok=True)
+        
+        shutil.copytree(directorio_origen, nuevo_directorio)
+        
+        print(f"El contenido de '{directorio_origen}' se copió en '{nuevo_directorio}'.")
+    except Exception as e:
+        print(f"Se produjo un error: {e}")
+
+directorio_origen = "mi_directorio_origen"  # Ruta del directorio de origen
+directorio_destino_base = "mi_directorio_destino"  # Ruta base del directorio destino
+copiar_directorio(directorio_origen, directorio_destino_base)
+
+* Como puedes ver, hay módulos y funciones para todo. Hablamos de los módulos justo a continuación y, si quieres saber más sobre la fecha y la hora, consulta la documentación del módulo datetime justo aquí: https://docs.python.org/3/library/datetime.html *
