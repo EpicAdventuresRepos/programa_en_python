@@ -1,0 +1,30 @@
+# I.1. Crea un entorno virtual e instala algunos paquetes y pruébalos. Esto quiere decir que tienes que leer su documentación. Ya verás como la entiendes. Te pongo algunos ejemplos de paquetes a continuación.
++ Pandas: Herramienta fundamental para manipulación y análisis de datos estructurados, como tablas y series temporales.
++ NumPy: Biblioteca para computación científica, que incluye soporte para operaciones con arrays multidimensionales.
++ BeautifulSoup: Biblioteca para extraer datos de HTML y XML.
++ Pyautogui: Para automatizar interacciones de escritorio como clics y escritura.
++ Argparse: Para manejar argumentos de línea de comandos.
++ Rich: Para crear salidas de consola elegantes y enriquecidas con colores, tablas, barras de progreso, etc.
+
+# I.2.. Usa any pasa descubrir si una lista de enteros tiene algún número negativo.
+
+numeros = [1, -2, 0, 3]
+print(any(x < 0 for x in numeros)) 
+
+## I.3. Intenta hacer tú mismo algún ejemplo con otras funciones que utilicen iteradores, por ejemplo: all, zip, map, etc.
+
+* Comprueba si todos los números son negativos. *
+numeros = [1, -2, 0, 3]
+print(any(x < 0 for x in numeros)) 
+
+* Calcula los cuadrados de una lista de números. *
+numeros = [1, 2, 3]
+cuadrados = map(lambda x: x ** 2, numeros)
+print(list(cuadrados))
+
+## I.4. Escribe una función lambda para ordenar una lista de tuplas basada en el segundo valor de cada tupla. Una tupla es una secuencia de dos elementos, o sea, esto: (3, 5).
+tuplas = [(1, 3), (2, 1), (4, 5)]
+ [(2, 1), (1, 3), (4, 5)]
+
+ordenadas = sorted(tuplas, key=lambda x: x[1]) 
+print(ordenadas)
