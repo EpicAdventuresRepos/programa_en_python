@@ -1,0 +1,89 @@
+## J.07. Copia el ejemplo de plantillas del correo anterior, u otro ejercicio que hayas hecho con el que te sientas cómodo, y mira qué hay que cambiar para que funcione con Jinja.
+
+
+from jinja2 import Environment, PackageLoader, select_autoescape
+
+env = Environment(
+    loader=PackageLoader("./"),
+    autoescape=select_autoescape()
+)
+
+
+class Objeto(object):
+    def __init__(self, name, s_desc=None, desc="", loc="NOTCREATED"):
+        self._name = name.upper()
+        self._loc = loc
+        self._desc=desc
+        self._short_desc = s_desc
+        if s_desc is None:
+            self._short_desc = "An " + name + "."
+
+objetos = (
+    Objeto("Hammer", "A blacksmith's hammer", "A weapon made for everyday use.#n6 points of damage."),
+    Objeto("Anchor", desc="From a ship that was shipwrecked long ago.#n10 points of damage."),
+    Objeto("Egg", desc="Bigger than your head.", loc="10")
+)
+
+contadores = [200, 0]
+template = env.get_template("plantilla.daad")
+print(template.render(contadores=contadores, objetos=objetos))
+
+
+* contenido de plantilla .daad *
+
+plantilla = """
+; Palabra
+{% for obj in objetos %}
+{{obj._name}} {{contadores[0]}}
+{% contadores[0] += 1 %}
+{% endfor %}
+
+; Descripción corta
+{% for obj in objetos %}
+#define o{{obj._name}} {{contadores[1]}}
+/o{{obj._name}} "{{obj._short_desc}}"
+{% contadores[1] += 1 %}
+{% endfor %}
+
+; Declaración de objeto
+{% for obj in objetos %}
+/o{{obj._name}}      {{obj._loc}} 1       _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ Y    {{obj._name}}   _ 
+{% endfor %}
+
+; Examinar
+{% for obj in objetos %}
+> EX  HAMMER     PRESENT o{{obj._name}}  
+                 MESSAGE "{{obj._desc}}"
+                 DONE                
+{% endfor %}
+"""
+
+
+## J.01. Vamos a aprovechar el código del ejemplo para hacer un manual de usuario en HTML. Escribe una plantilla que genere una página de manual de usuario para los objetos que hemos definido. No te compliques con el código HTML, cuanto más sencillo mejor.
+Si nos sabes HTML para hacerlo, invéntatelo y luego compara tu solución con la del repositorio.
+
+Sólo tienes que cambiar el nombre de gixhero por el nombre de fichero dónde tengas tu plantilla en la siguiente línea.
+template = env.get_template("plantilla.daad")
+
+El contenido de la plantilla HTML es:
+
+Contenido del archivo "plantilla.html"
+
+<HTML>
+
+<HEAD> </HEAD>
+<BODY>
+
+{% for obj in objetos %}
+<P> <BOLD> {{obj._name}} </BOLD> </P>
+<P> Está en: {{obj._name}}      </P>
+<P> {{obj._desc}}      </P>
+<HR/>
+{% end %}
+
+</BODY>
+
+</HTML>
+
+
+

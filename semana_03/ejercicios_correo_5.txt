@@ -1,0 +1,17 @@
+## O.1. Vamos a empezar con tipos básicos. Guarda en fichero y caga una lista y un diccionario (por separado) con algunos valores de ejemplo.
+
+""" Guardar """
+import pickle
+
+datos = {"nombre": "Juan", "edad": 30, "ciudad": "Madrid"}
+
+with open("datos.pkl", "wb") as archivo:
+    pickle.dump(datos, archivo)
+print("Objeto guardado exitosamente.")
+
+""" Cargar """
+import pickle
+
+with open("datos.pkl", "rb") as archivo:
+    datos_cargados = pickle.load(archivo)
+print("Objeto cargado:", datos_cargados)
